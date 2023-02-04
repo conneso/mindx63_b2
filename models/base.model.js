@@ -7,6 +7,12 @@ class BaseModel {
     this.model = mongoose.model(name, schema);
   }
 
+  //get all
+  get() {
+    let query = this.model.find();
+    return query.exec();
+  }
+  
   //R = Research
   get(id) {
     let query = this.model.findById(id);
@@ -20,16 +26,16 @@ class BaseModel {
   }
 
   //U = Update
-  update(id, data){
-    let result = this.model.updateOne({_id: id}, data)
+  update(id, data) {
+    let result = this.model.updateOne({ _id: id }, data);
     return result;
   }
 
   //D = Delete
-  delete(id){
-    let result = this.model.deleteOne({_id: id})
+  delete(id) {
+    let result = this.model.deleteOne({ _id: id });
     return result;
   }
 }
 
-module.exports = BaseModel
+module.exports = BaseModel;

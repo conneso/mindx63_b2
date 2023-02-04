@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const OrderSchema = require("../schemas/order.schema");
+const OrderSchema = require("./schemas/order.schema");
 const BaseModel = require("./base.model");
 
 class OrderModel extends BaseModel {
@@ -8,7 +8,7 @@ class OrderModel extends BaseModel {
     this.init("orders", OrderSchema);
   }
 
-async getOrderDetail(id) {
+  async getOrderDetail(id) {
     let agg = [
       {
         $unwind: {
@@ -57,8 +57,8 @@ async getOrderDetail(id) {
 
     let result = await this.model.aggregate(agg).exec();
 
-    if(result.length > 0) return result[0]
-    
+    if (result.length > 0) return result[0];
+
     return this.get(id);
   }
 }
