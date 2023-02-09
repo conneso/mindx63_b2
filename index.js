@@ -1,7 +1,9 @@
 const exp = require("express");
-
+const cors = require("cors")
 const app = exp();
 app.use(exp.json());
+
+app.use(cors())
 
 const myLog = require("./logger");
 app.use(myLog);
