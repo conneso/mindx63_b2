@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const model = require("../models/user.model");
+const orderModel = require('../models/order.model')
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -21,7 +22,8 @@ class UserController {
             { username: username, email: user.email },
             "ngcaDBiBWKatwMXO5S07"
           );
-          res.send({ existed: true, token: token, message: "Found" });
+          let myOrders = await orderModel.getMyOrders(user._id)
+          res.send({ existed: true, token: token, user: user, myOrders: myOrders, message: "Found" });
         } else {
           res.send({ existed: false, token: "", message: "Password is wrong" });
         }

@@ -61,6 +61,11 @@ class OrderModel extends BaseModel {
 
     return this.get(id);
   }
+
+  async getMyOrders(userId){
+    let result = await this.model.find({createdBy: userId})
+    return result
+  }
 }
 
 module.exports = new OrderModel();
